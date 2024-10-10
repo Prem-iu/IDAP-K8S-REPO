@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: timescale-pvc-io1
+spec:
+  storageClassName: standard-io1
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10000Gi
