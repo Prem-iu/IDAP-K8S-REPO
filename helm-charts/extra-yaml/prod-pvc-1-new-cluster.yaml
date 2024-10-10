@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-volume-timescaledb-0
+  namespace: timescaledb1
+spec:
+  storageClassName: io2
+  accessModes:
+    - ReadWriteOnce
+  selector:
+    matchLabels:
+      purpose: data-directory
+  resources:
+    requests:
+      storage: 12Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: partition1-timescaledb-0
+  namespace: timescaledb1
+spec:
+  storageClassName: io1
+  accessModes:
+    - ReadWriteOnce
+  selector:
+    matchLabels:
+      purpose: tablespace
+      tablespace: partition1
+  resources:
+    requests:
+      storage: 10Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wal-volume-timescaledb-0
+  namespace: timescaledb1
+spec:
+  storageClassName: io2
+  accessModes:
+    - ReadWriteOnce
+  selector:
+    matchLabels:
+      purpose: wal-directory
+  resources:
+    requests:
+      storage: 150Gi

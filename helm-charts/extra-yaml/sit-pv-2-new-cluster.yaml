@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sit-ebs-10gb-wal
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1b
+    eks.amazonaws.com/nodegroup: iu-sit-ap-south-1-data-platform-eks-cluster-new-nodegroup-one # name of node group
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  # claimRef:
+  #   namespace: timescaledb
+  #   name: wal-volume-timescaledb-0
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2-01
+  awsElasticBlockStore:
+    volumeID: vol-01dacf8add848b62d
+    fsType: ext4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sit-ebs-20gb-storage
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1b
+    eks.amazonaws.com/nodegroup: iu-sit-ap-south-1-data-platform-eks-cluster-new-nodegroup-one
+spec:
+  capacity:
+    storage: 20Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  # claimRef:
+  #   namespace: timescaledb
+  #   name: storage-volume-timescaledb-0
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2-01
+  awsElasticBlockStore:
+    volumeID: vol-01e810ac3027f92c2
+    fsType: ext4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sit-ebs-5gb-storage
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1b
+    eks.amazonaws.com/nodegroup: iu-sit-ap-south-1-data-platform-eks-cluster-new-nodegroup-one
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  # claimRef:
+  #   namespace: timescaledb
+  #   name: storage-volume-timescaledb-0
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2-01
+  awsElasticBlockStore:
+    volumeID: vol-048617262ad3816a7
+    fsType: ext4

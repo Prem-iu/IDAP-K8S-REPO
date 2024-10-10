@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prod-6-ebs-300gb-storage
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1b
+    eks.amazonaws.com/nodegroup: iu-prod-data-platform-eks-cluster-nodegroup-one
+    purpose: data-directory
+    release: timescaledb6
+    app: timescaledb6
+spec:
+  capacity:
+    storage: 300Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp3
+  awsElasticBlockStore:
+    volumeID: vol-0390a6ae87bf299d6
+    fsType: ext4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prod-6-ebs-70gb-wal
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1b
+    eks.amazonaws.com/nodegroup: iu-prod-data-platform-eks-cluster-nodegroup-one
+    purpose: wal-directory
+    release: timescaledb6
+    app: timescaledb6
+spec:
+  capacity:
+    storage: 70Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: io1
+  awsElasticBlockStore:
+    volumeID: vol-0332eb0e8e56d4006
+    fsType: ext4
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: prod-4-ebs-3.3tb-storage-partition2
+#   labels:
+#     type: amazonEBS
+#     topology.kubernetes.io/zone: ap-south-1b
+#     eks.amazonaws.com/nodegroup: iu-prod-data-platform-eks-cluster-nodegroup-one
+#     purpose: tablespace
+#     tablespace: partition2
+#     release: timescaledb4
+#     app: timescaledb4
+# spec:
+#   capacity:
+#     storage: 5.3Ti
+#   volumeMode: Filesystem
+#   accessModes:
+#   - ReadWriteOnce
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: gp3
+#   awsElasticBlockStore:
+#     volumeID: vol-0586e5a1ccb2141b7
+#     fsType: ext4
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: prod-4-ebs-7.8tb-storage-partition3
+#   labels:
+#     type: amazonEBS
+#     topology.kubernetes.io/zone: ap-south-1b
+#     eks.amazonaws.com/nodegroup: iu-prod-data-platform-eks-cluster-nodegroup-one
+#     purpose: tablespace
+#     tablespace: partition3
+#     release: timescaledb4
+#     app: timescaledb4
+# spec:
+#   capacity:
+#     storage: 7.8Ti
+#   volumeMode: Filesystem
+#   accessModes:
+#   - ReadWriteOnce
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: gp3
+#   awsElasticBlockStore:
+#     volumeID: vol-090f5f1fa32ed2bda
+#     fsType: ext4

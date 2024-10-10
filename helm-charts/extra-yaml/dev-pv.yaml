@@ -1,0 +1,17 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: timescale-io1
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: us-east-1
+    failure-domain.beta.kubernetes.io/zone: us-east-1a
+spec:
+  storageClassName: "standard-io1"
+  capacity:
+    storage: 10000Gi
+  accessModes:
+    - ReadWriteMany
+  awsElasticBlockStore:
+    volumeID: vol-0464a71aec8cab5b0
+    fsType: xfs
