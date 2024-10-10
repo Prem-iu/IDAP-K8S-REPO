@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sti-ebs-150gb-v1
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1a
+    eks.amazonaws.com/nodegroup: iu-dev-sit-data-platform-eks-cluster--nodegroup-one
+    eks.amazonaws.com/nodegroup-image: ami-01284785b4493ef5c
+spec:
+  capacity:
+    storage: 150Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2
+  awsElasticBlockStore:
+    volumeID: vol-0aea33306c553c6bd
+    fsType: ext4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sti-ebs-150gb-v2
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1a
+    eks.amazonaws.com/nodegroup: iu-dev-sit-data-platform-eks-cluster--nodegroup-one
+    eks.amazonaws.com/nodegroup-image: ami-01284785b4493ef5c
+spec:
+  capacity:
+    storage: 150Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2
+  awsElasticBlockStore:
+    volumeID: vol-08f73eba5afcbeca4
+    fsType: ext4

@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: timescaledb-timescaledb-load-balancer
+  namespace: default
+  labels:
+    app: timescaledb-uat
+    app.kubernetes.io/component: timescaledb-uat
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: timescaledb-uat
+    app.kubernetes.io/version: 0.33.2
+    chart: timescaledb-single-0.33.2
+    cluster-name: timescaledb-uat
+    heritage: Helm
+    release: timescaledb-uat
+    role: master
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  managedFields:
+    - manager: kubectl-expose
+      operation: Update
+      apiVersion: v1
+      time: '2023-09-29T12:41:12Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/version: {}
+            f:chart: {}
+            f:cluster-name: {}
+            f:heritage: {}
+            f:release: {}
+            f:role: {}
+        f:spec:
+          f:allocateLoadBalancerNodePorts: {}
+          f:externalTrafficPolicy: {}
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":5432,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+    - manager: aws-cloud-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-09-29T12:41:15Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"service.kubernetes.io/load-balancer-cleanup": {}
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      subresource: status
+  selfLink: /api/v1/namespaces/default/services/timescaledb-uat-timescaledb-load-balancer
+status:
+  loadBalancer:
+    ingress:
+      - hostname: >-
+          uat-eks-timescaledb-lb-1731589320.ap-south-1.elb.amazonaws.com
+spec:
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 31333
+  selector:
+    app: timescaledb-uat
+    cluster-name: timescaledb-uat
+    role: master
+  clusterIP: 172.20.0.11
+  clusterIPs:
+    - 172.20.0.11
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster

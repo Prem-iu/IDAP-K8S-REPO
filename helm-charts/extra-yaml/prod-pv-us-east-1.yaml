@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prod-ebs-31tb-v1
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: us-east-1
+    failure-domain.beta.kubernetes.io/zone: us-east-1b
+    eks.amazonaws.com/nodegroup: iu-prod-us-east-1-data-platform-eks-cluster-nodegroup-one
+
+spec:
+  capacity:
+    storage: 31Ti
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: io2
+  awsElasticBlockStore:
+    volumeID: vol-0eaf47615eed446a8
+    fsType: ext4
