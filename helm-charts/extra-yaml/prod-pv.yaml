@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prod-ebs-30tb-v1
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1a
+    eks.amazonaws.com/nodegroup: prod-data-platform-eks-cluster-nodegroup-one
+
+spec:
+  capacity:
+    storage: 30Ti
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: io2
+  awsElasticBlockStore:
+    volumeID: vol-030760da97cab43c7
+    fsType: ext4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prod-ebs-150gb-v2
+  labels:
+    type: amazonEBS
+    failure-domain.beta.kubernetes.io/region: ap-south-1
+    failure-domain.beta.kubernetes.io/zone: ap-south-1a
+    eks.amazonaws.com/nodegroup: prod-data-platform-eks-cluster-nodegroup-one
+spec:
+  capacity:
+    storage: 150Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2
+  awsElasticBlockStore:
+    volumeID: vol-0bc8cadedfb6eedfb
+    fsType: ext4
