@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-volume-timescaledb5-0
+  namespace: timescaledb5
+spec:
+  storageClassName: gp3
+  accessModes:
+    - ReadWriteOnce
+  selector:
+    matchLabels:
+      purpose: data-directory
+  resources:
+    requests:
+      storage: 50Gi

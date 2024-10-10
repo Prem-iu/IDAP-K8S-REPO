@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  labels:
+    app: ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+      - image: ubuntu
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        imagePullPolicy: IfNotPresent
+        name: ubuntu-new
+        resources:
+          requests:
+            memory: "120Gi"
+            cpu: "40"
+            ephemeral-storage: "300Gi"
+          limits:
+            memory: "120Gi"
+            cpu: "40"
+            ephemeral-storage: "300Gi"
+      restartPolicy: Always
